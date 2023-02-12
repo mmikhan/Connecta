@@ -32,6 +32,7 @@ static struct k_work on_disconnect_work;
 mtd_mode_toggle_cb_t on_mtd_mode_toggle;
 
 /* Options supported by the server */
+static const char *const uwb_option[] = { UWB_URI_PATH, NULL };
 static const char *const light_option[] = { LIGHT_URI_PATH, NULL };
 static const char *const provisioning_option[] = { PROVISIONING_URI_PATH,
 						   NULL };
@@ -288,5 +289,20 @@ void coap_client_toggle_minimal_sleepy_end_device(void)
 {
 	if (IS_ENABLED(CONFIG_OPENTHREAD_MTD_SED)) {
 		k_work_submit(&toggle_MTD_SED_work);
+	}
+}
+
+void coap_client_send_uwb_request(uint8_t *const data)
+{
+	if (unique_local_addr.sin6_addr.s6_addr16[0] == 0) {
+		LOG_INF("Send multicast mesh 'uwb' request");
+		coap_send_request(COAP_METHOD_PUT,
+				  (const struct sockaddr *)&multicast_local_addr,
+				  uwb_option, data, sizeof(data), NULL);
+	} else {
+		LOG_INF("Send unicast 'uwb' request to: %s", unique_local_addr_str);
+		coap_send_request(COAP_METHOD_PUT,
+				  (const struct sockaddr *)&unique_local_addr,
+				  uwb_option, data, sizeof(data), NULL);
 	}
 }

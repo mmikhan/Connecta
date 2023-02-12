@@ -17,6 +17,9 @@
 
 LOG_MODULE_REGISTER(ot_coap_utils, CONFIG_OT_COAP_UTILS_LOG_LEVEL);
 
+char data[30];
+uint16_t data_length = 0;
+
 struct server_context {
 	struct otInstance *ot;
 	bool provisioning_enabled;
@@ -159,11 +162,13 @@ static void coap_default_handler(void *context, otMessage *message,
 				 const otMessageInfo *message_info)
 {
 	ARG_UNUSED(context);
-	ARG_UNUSED(message);
 	ARG_UNUSED(message_info);
 
-	LOG_INF("Received CoAP message that does not match any request "
-		"or resource");
+	data_length = otMessageRead(message, otMessageGetOffset(message), data,
+				    sizeof(data));
+	data[data_length] = '\0';
+
+	LOG_INF("Received 'uwb' data: %s", data);
 }
 
 void ot_coap_activate_provisioning(void)
