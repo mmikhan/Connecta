@@ -23,5 +23,13 @@
 		"explorer.openEditors.visible": 0,
 		"workbench.colorTheme": "Default High Contrast",
 		"zenMode.silentNotifications": false,
+		"files.associations": {
+			"coap_client_utils.h": "c",
+			"limits": "c",
+			"functional": "c",
+			"tuple": "c",
+			"*.tcc": "c",
+			"string": "c"
+		},
 	}
 }
