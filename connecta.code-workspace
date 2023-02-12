@@ -1,0 +1,27 @@
+{
+	"folders": [
+		{
+			"name": "coap_client",
+			"path": "coap_client"
+		},
+		{
+			"name": "coap_server",
+			"path": "coap_server"
+		},
+	],
+	"settings": {
+		"nrf-connect.toolchain.path": "${nrf-connect.toolchain:2.2.0}",
+		"nrf-connect.topdir": "${nrf-connect.sdk:2.2.0}",
+		"nrf-connect.applications": [
+			"${workspaceFolder:coap_client}",
+			"${workspaceFolder:coap_server}",
+		],
+		"editor.minimap.enabled": false,
+		"files.trimFinalNewlines": true,
+		"files.insertFinalNewline": true,
+		"files.trimTrailingWhitespace": true,
+		"explorer.openEditors.visible": 0,
+		"workbench.colorTheme": "Default High Contrast",
+		"zenMode.silentNotifications": false,
+	}
+}
