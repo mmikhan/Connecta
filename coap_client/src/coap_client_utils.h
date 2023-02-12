@@ -61,6 +61,12 @@ void coap_client_send_provisioning_request(void);
  */
 void coap_client_toggle_minimal_sleepy_end_device(void);
 
+/** @brief Send data to the CoAP server.
+ *
+ * @param[in] data Pointer to the data to be sent.
+ */
+void coap_client_send_uwb_request(uint8_t *const data);
+
 #endif
 
 /**

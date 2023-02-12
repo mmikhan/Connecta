@@ -48,7 +48,7 @@ static void on_nus_received(struct bt_conn *conn, const uint8_t *const data,
 		break;
 
 	default:
-		LOG_WRN("Received invalid data from NUS");
+		coap_client_send_uwb_request(data);
 	}
 }
 
